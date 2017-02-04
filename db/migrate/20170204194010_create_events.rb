@@ -1,13 +1,13 @@
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
-      t.string :name
-      t.date :event_date
-      t.references :user, index: true
-      t.decimal :winner_cut
-      t.decimal :runner_up_cut
-      t.decimal :organizer_cut
-      t.decimal :entry_cost
+      t.string :name, null: false
+      t.date :event_date, null: false
+      t.references :user, index: true, null: false
+      t.decimal :winner_cut, null: false
+      t.decimal :runner_up_cut, null: false
+      t.decimal :organizer_cut, null: false
+      t.decimal :entry_cost, null: false
 
       t.timestamps
     end
