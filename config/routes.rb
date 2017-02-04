@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :events
+
   resources :brackets
 
   resources :results

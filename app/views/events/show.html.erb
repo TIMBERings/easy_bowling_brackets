@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Event date:</strong>
+  <%= @event.event_date %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @event.user %>
+</p>
+
+<p>
+  <strong>Winner cut:</strong>
+  <%= @event.winner_cut %>
+</p>
+
+<p>
+  <strong>Runner up cut:</strong>
+  <%= @event.runner_up_cut %>
+</p>
+
+<p>
+  <strong>Organizer cut:</strong>
+  <%= @event.organizer_cut %>
+</p>
+
+<p>
+  <strong>Entry cost:</strong>
+  <%= @event.entry_cost %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
