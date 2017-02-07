@@ -1,3 +1,3 @@
-class Bowler < ActiveRecord::Base
+class Bowler < ApplicationRecord
   has_and_belongs_to_many :brackets
 end

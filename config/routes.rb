@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bracket_groups
   resources :users
 
   resources :events

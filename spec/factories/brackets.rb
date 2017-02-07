@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :bracket do
-    event
+    bracket_group
 
     results {
       {

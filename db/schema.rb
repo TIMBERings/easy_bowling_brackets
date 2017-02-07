@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204194014) do
+ActiveRecord::Schema.define(version: 20170207001541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,13 +31,21 @@ ActiveRecord::Schema.define(version: 20170204194014) do
     t.index ["bracket_id"], name: "index_bowlers_brackets_on_bracket_id", using: :btree
   end
 
+  create_table "bracket_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "event_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_bracket_groups_on_event_id", using: :btree
+  end
+
   create_table "brackets", force: :cascade do |t|
-    t.integer  "event_id"
+    t.integer  "bracket_group_id"
     t.json     "seeds"
     t.json     "results"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["event_id"], name: "index_brackets_on_event_id", using: :btree
+    t.index ["bracket_group_id"], name: "index_brackets_on_bracket_group_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -61,4 +69,5 @@ ActiveRecord::Schema.define(version: 20170204194014) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "brackets", "bracket_groups"
 end
