@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :bracket_groups
+  resources :bracket_groups do
+    post 'generate'
+  end
   resources :users
 
   resources :events

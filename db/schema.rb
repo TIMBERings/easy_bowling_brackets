@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(version: 20170207001541) do
   enable_extension "plpgsql"
 
   create_table "bowlers", force: :cascade do |t|
-    t.string   "name",          null: false
+    t.string   "name",                           null: false
     t.integer  "starting_lane"
+    t.decimal  "paid",           default: "0.0", null: false
+    t.integer  "rejected_count", default: 0,     null: false
+    t.integer  "average"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,8 +28,6 @@ ActiveRecord::Schema.define(version: 20170207001541) do
   create_table "bowlers_brackets", force: :cascade do |t|
     t.integer "bowler_id"
     t.integer "bracket_id"
-    t.boolean "paid",       default: false, null: false
-    t.boolean "rejected",   default: false, null: false
     t.index ["bowler_id"], name: "index_bowlers_brackets_on_bowler_id", using: :btree
     t.index ["bracket_id"], name: "index_bowlers_brackets_on_bracket_id", using: :btree
   end

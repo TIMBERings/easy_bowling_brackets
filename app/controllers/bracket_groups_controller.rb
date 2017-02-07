@@ -1,5 +1,5 @@
 class BracketGroupsController < ApplicationController
-  before_action :set_bracket_group, only: [:show, :update, :destroy]
+  before_action :set_bracket_group, only: [:generate, :show, :update, :destroy]
 
   # GET /bracket_groups
   # GET /bracket_groups.json
@@ -40,6 +40,15 @@ class BracketGroupsController < ApplicationController
     @bracket_group.destroy
   end
 
+
+  def generate
+    if @bracket_group.generate_brackets(generate_params[:bowlers])
+      render :show, status: :ok, location: @bracket_group
+    else
+      render json: @bracket_group.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bracket_group
@@ -49,5 +58,9 @@ class BracketGroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bracket_group_params
       params.require(:bracket_group).permit(:name, :event_id)
+    end
+
+    def generate_params
+      params.require(:bracket_group).permit(:bowlers)
     end
 end
