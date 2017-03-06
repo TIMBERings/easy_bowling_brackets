@@ -43,6 +43,7 @@ gem 'validates_formatting_of'
 gem 'tzinfo-data'
 
 group :development, :test do
+  gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'

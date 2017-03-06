@@ -6,6 +6,7 @@ class CreateBowlers < ActiveRecord::Migration
       t.decimal :paid, null: false, default: 0
       t.integer :rejected_count, null: false, default: 0
       t.integer :average
+      t.integer :entries, null: false
 
       t.timestamps
     end

@@ -21,5 +21,7 @@ module EasyBowlingBrackets
     # config.i18n.default_locale = :de
 
     config.api_only = true
+    config.autoload_paths << Rails.root.join('app/intentions')
+
   end
 end
