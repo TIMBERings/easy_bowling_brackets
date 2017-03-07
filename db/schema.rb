@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170207001541) do
     t.decimal  "paid",           default: "0.0", null: false
     t.integer  "rejected_count", default: 0,     null: false
     t.integer  "average"
-    t.integer  "entries",                        null: false
+    t.integer  "entries",        default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :bowler do
     name { Faker::Name.name }
-    average { rand(150..230) }
-    entries { rand(2..8) }
-    paid true
+    paid 0.0
+    rejected_count 0
+    entries 0
   end
 end
