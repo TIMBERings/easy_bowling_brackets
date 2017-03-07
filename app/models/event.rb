@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :brackets
 
   validates :name, presence: true
+  validates :event_date, presence: true
   validates :user, presence: true
   validates :winner_cut, presence: true, numericality: true
   validates :runner_up_cut, presence: true, numericality: true
