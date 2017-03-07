@@ -36,4 +36,5 @@ config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' 
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.log_level = :error
 end

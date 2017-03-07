@@ -1,4 +1,4 @@
-class CreateBracketsIntention
+class GenerateBracketsIntention
   BRACKET_SIZE = 8
 
   def initialize(bracket_group, bowlers)

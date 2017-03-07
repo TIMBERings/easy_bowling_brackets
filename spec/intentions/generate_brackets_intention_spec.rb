@@ -1,6 +1,6 @@
   require 'rails_helper'
 
-  describe CreateBracketsIntention do
+  describe GenerateBracketsIntention do
     let(:bowlers) do
       [
         {name: Faker::Name.name, average: rand(150..250), entries: 1, paid: true, starting_lane: 1},
@@ -14,7 +14,7 @@
       ]
     end
     let(:bracket_group) { FactoryGirl.create(:bracket_group) }
-    let(:cbi) { CreateBracketsIntention.new(bracket_group, bowlers)}
+    let(:cbi) { GenerateBracketsIntention.new(bracket_group, bowlers)}
 
     describe '#initialize' do
       context 'when there are not enough bowlers provided' do

@@ -22,6 +22,6 @@ module EasyBowlingBrackets
 
     config.api_only = true
     config.autoload_paths << Rails.root.join('app/intentions')
-
+    config.logger = Logger.new(STDOUT)
   end
 end
