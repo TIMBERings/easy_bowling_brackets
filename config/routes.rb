@@ -1,16 +1,22 @@
 Rails.application.routes.draw do
-  resources :bracket_groups do
-    post 'generate'
+  namespace :api, constraints: { format: 'json' } do
+    namespace :v1 do
+
+      resources :events do
+        resources :bracket_groups, shallow: true do
+          post 'generate'
+          resources :brackets, shallow: true do
+            resources :bowlers, shallow: true
+          end
+        end
+      end
+
+      resources :users
+      resources :bracket_groups, only: :index
+      resources :brackets, only: :index
+      resources :bowlers, only: :index
+    end
   end
-  resources :users
-
-  resources :events
-
-  resources :brackets
-
-  resources :results
-
-  resources :bowlers
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
