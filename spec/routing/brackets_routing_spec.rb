@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe BracketsController, type: :routing do
+RSpec.describe Api::V1::BracketsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do

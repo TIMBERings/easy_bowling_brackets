@@ -1,8 +1,8 @@
 module Api
   module V1
     class BowlersController < ApplicationController
-      before_action :set_bowler, only: [:show, :edit, :update, :destroy]
-
+      before_action :set_bowler, only: [:show, :update, :destroy]
+      before_action :set_bracket, only: [:create]
       # GET /api/v1/bowlers.json
       def index
         render json: Bowler.all
@@ -15,27 +15,23 @@ module Api
 
       # POST /api/v1/bowlers.json
       def create
+        render json: 'Bracket not found', status: :not_found unless @bracket
         @bowler = Bowler.new(bowler_params)
 
-        respond_to do |format|
-          if @bowler.save
-            render :show, status: :created, location: @bowler
-          else
-            render json: @bowler.errors, status: :unprocessable_entity
-          end
+        if @bowler.save
+          @bracket.bowlers << @bowler unless @bracket.bowlers.include? @bowler
+          render json: @bowler, status: :created
+        else
+          render json: @bowler.errors, status: :unprocessable_entity
         end
       end
 
       # PATCH/PUT /api/v1/bowlers/1.json
       def update
-        respond_to do |format|
-          if @bowler.update(bowler_params)
-            format.html { redirect_to @bowler, notice: 'Bowler was successfully updated.' }
-            format.json { render :show, status: :ok, location: @bowler }
-          else
-            format.html { render :edit }
-            format.json { render json: @bowler.errors, status: :unprocessable_entity }
-          end
+        if @bowler.update(bowler_params)
+          render json: @bowler, status: :ok
+        else
+          render json: @bowler.errors, status: :unprocessable_entity
         end
       end
 
@@ -43,10 +39,7 @@ module Api
       # DELETE /api/v1/bowlers/1.json
       def destroy
         @bowler.destroy
-        respond_to do |format|
-          format.html { redirect_to bowlers_url, notice: 'Bowler was successfully destroyed.' }
-          format.json { head :no_content }
-        end
+        head :no_content
       end
 
       private
@@ -55,9 +48,13 @@ module Api
           @bowler = Bowler.find(params[:id])
         end
 
+        def set_bracket
+          @bracket = Bracket.find(params[:bracket_id])
+        end
+
         # Never trust parameters from the scary internet, only allow the white list through.
         def bowler_params
-          params.require(:bowler).permit(:name, :starting_lane, :paid, :rejected)
+          params.require(:bowler).permit(:name, :starting_lane, :paid, :rejected_count, :entries, :average)
         end
     end
   end

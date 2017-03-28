@@ -34,8 +34,9 @@ gem 'rack-cors'
 gem 'bundler'
 
 group :development do
-  gem 'pry-rails'
+  gem 'awesome_print'
   gem 'better_errors'
+  gem 'pry-rails'
 end
 
 gem 'binding_of_caller'
@@ -47,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'fuubar'
 end
 
 group :test do
