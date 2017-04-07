@@ -2,6 +2,7 @@ class BracketGroup < ApplicationRecord
 
   belongs_to :event
   has_many :brackets
+  has_many :entries
 
   validates :name, presence: true
 

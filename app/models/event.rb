@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :user
-  has_many :brackets
+  has_many :bracket_groups
 
   validates :name, presence: true
   validates :event_date, presence: true

@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :bowler do
     name { Faker::Name.name }
-    paid 0.0
-    rejected_count 0
-    entries 4
-    average { rand 120..230 }
-    starting_lane { rand 1..24 }
+
+    trait :with_usbc_id do
+      usbc_id { "#{rand(1000..9999)}-#{rand(10000..99999)}" }
+    end
   end
 end

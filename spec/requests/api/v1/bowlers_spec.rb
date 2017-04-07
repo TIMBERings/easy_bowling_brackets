@@ -5,22 +5,14 @@ RSpec.describe "Bowlers", type: :request do
   let(:valid_params) do
     {
        name: 'Scooby Doo',
-       starting_lane: 11,
-       paid: 30.00,
-       rejected_count: 1,
-       average: 208,
-       entries: 6
+       usbc_id: '1234-5432'
     }
   end
 
   let(:invalid_params) do
     {
-       name: 'Scooby Doo',
-       starting_lane: 'word',
-       paid: 'something',
-       rejected_count: false,
-       average: 'one',
-       entries: 'six'
+       name: nil,
+       usbc_id: '1234-5432'
     }
   end
 
@@ -71,20 +63,16 @@ RSpec.describe "Bowlers", type: :request do
   end
 
   describe 'PATCH /api/v1/bowlers/:id' do
-    let!(:bowler) { FactoryGirl.create(:bowler) }
+    let!(:bowler) { FactoryGirl.create(:bowler, :with_usbc_id) }
     let(:partial_valid_params) do
       {
-         name: 'Scooby Doo',
-         starting_lane: 11,
-         paid: 30.00
+         name: 'Scooby Doo'
       }
     end
 
     let(:partial_invalid_params) do
       {
-         name: 'Scooby Doo',
-         starting_lane: 'word',
-         paid: 'something'
+         name: nil
       }
     end
 
@@ -102,11 +90,7 @@ RSpec.describe "Bowlers", type: :request do
         expect(Bowler.last.attributes.except('created_at', 'updated_at')).to eq({
           'id' => initial_attributes['id'],
           'name' => partial_valid_params[:name],
-          'starting_lane' => partial_valid_params[:starting_lane],
-          'paid' => partial_valid_params[:paid],
-          'rejected_count' => initial_attributes['rejected_count'],
-          'average' => initial_attributes['average'],
-          'entries' => initial_attributes['entries']
+          'usbc_id' => initial_attributes['usbc_id']
         })
       end
 

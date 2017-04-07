@@ -32,11 +32,13 @@ gem 'spring',        group: :development
 gem 'rack-cors'
 
 gem 'bundler'
+gem 'devise'
 
 group :development do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'pry-rails'
+  gem 'rails-erd'
 end
 
 gem 'binding_of_caller'

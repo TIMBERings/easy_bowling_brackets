@@ -10,18 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207001541) do
+ActiveRecord::Schema.define(version: 20170407021828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bowlers", force: :cascade do |t|
-    t.string   "name",                           null: false
-    t.integer  "starting_lane"
-    t.decimal  "paid",           default: "0.0", null: false
-    t.integer  "rejected_count", default: 0,     null: false
-    t.integer  "average"
-    t.integer  "entries",        default: 0,     null: false
+    t.string   "name",       null: false
+    t.string   "usbc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,6 +46,21 @@ ActiveRecord::Schema.define(version: 20170207001541) do
     t.index ["bracket_group_id"], name: "index_brackets_on_bracket_group_id", using: :btree
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer  "bracket_group_id",                 null: false
+    t.integer  "starting_lane"
+    t.integer  "entry_count",      default: 0,     null: false
+    t.boolean  "paid",             default: false, null: false
+    t.integer  "rejected_count",   default: 0,     null: false
+    t.boolean  "refunded",         default: false, null: false
+    t.integer  "average"
+    t.integer  "bowler_id",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["bowler_id"], name: "index_entries_on_bowler_id", using: :btree
+    t.index ["bracket_group_id"], name: "index_entries_on_bracket_group_id", using: :btree
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name",          null: false
     t.date     "event_date",    null: false
@@ -64,11 +75,22 @@ ActiveRecord::Schema.define(version: 20170207001541) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name", null: false
-    t.string   "last_name",  null: false
-    t.string   "email",      null: false
+    t.string   "first_name",                          null: false
+    t.string   "last_name",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "brackets", "bracket_groups"

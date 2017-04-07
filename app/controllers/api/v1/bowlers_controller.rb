@@ -54,7 +54,7 @@ module Api
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def bowler_params
-          params.require(:bowler).permit(:name, :starting_lane, :paid, :rejected_count, :entries, :average)
+          params.require(:bowler).permit(:name, :usbc_id)
         end
     end
   end
